@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,700');
 
 body {
-    background: #2E9CE6;
+    background: rgb(87, 87, 87);
     padding: 3em;
     font-family: 'Raleway', 'Arial';
     color: #fff;
@@ -29,4 +29,12 @@ a {
 
 .left {
     float: left;
+}
+
+.color-dark {
+    background: rgb(145, 145, 145);
+}
+
+.color-light {
+    background: rgb(221, 221, 221)
 }
