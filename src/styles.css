@@ -22,3 +22,11 @@ a {
     color: #fff;
     text-decoration: none;
 }
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
