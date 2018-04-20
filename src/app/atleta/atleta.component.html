@@ -1,28 +1,29 @@
 <div class="container color-dark">
-  <div class="col">
-    <p>
-      Adicionar atleta
-    </p>
-  </div>
-  <div class="col">
-    <p>
-      Atletas cadastrados
-    </p>
-  </div>
+	<div class="col">
+		<p>
+			Adicionar Atleta
+		</p>
+	</div>
+	<div class="col">
+		<p>
+			Atletas Cadastradas
+		</p>
+	</div>
 </div>
 <div class="container color-light">
-  <div class="col">
-    <form>
-      <div>
-        <input type="text" class="txt" name="nome" placeholder="Nome..." />
-        <input type="text" class="txt" name="idade" placeholder="Idade..." />
-        <input type="submit" class="btn" Value="Salvar" />
-      </div>
-    </form>
-  </div>
-  <div class="col">
-    <p class="life-container">
-      Artur José Mistura Junior - 20 anos
-    </p>
-  </div>
+	<div class="col">
+		<div>
+			<form>
+				<input [(ngModel)]="atleta.id" [ngModelOptions]="{standalone: true}" type="hidden" />
+				<input [(ngModel)]="atleta.nome" class="txt" placeholder="Nome da atleta" [ngModelOptions]="{standalone: true}">
+				<button class="btn" (click)="salvarAtleta()">Salvar</button>
+			</form>
+		</div>
+	</div>
+	<div class="col">
+		<div *ngFor="let atleta of atletas" class="life-container" (click)="editarAtleta(atleta)">
+			{{atleta.nome}}
+			<span class="right" (click)="excluirAtleta(atleta)">&#x2715;</span>
+		</div>
+	</div>
 </div>

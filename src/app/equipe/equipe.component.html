@@ -12,18 +12,18 @@
 </div>
 <div class="container color-light">
 	<div class="col">
-		<form>
-			<div>
+		<div>
+			<form>
 				<input [(ngModel)]="equipe.id" [ngModelOptions]="{standalone: true}" type="hidden" />
 				<input [(ngModel)]="equipe.nome" class="txt" placeholder="Nome da equipe" [ngModelOptions]="{standalone: true}">
 				<button class="btn" (click)="salvarEquipe()">Salvar</button>
-			</div>
-		</form>
+			</form>
+		</div>
 	</div>
 	<div class="col">
-		<p *ngFor="let equipe of equipes" class="life-container" (click)="editarEquipe(equipe)">
+		<div *ngFor="let equipe of equipes" class="life-container" (click)="editarEquipe(equipe)">
 			{{equipe.nome}}
 			<span class="right" (click)="excluirEquipe(equipe)">&#x2715;</span>
-		</p>
+		</div>
 	</div>
 </div>

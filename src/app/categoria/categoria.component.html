@@ -1,28 +1,29 @@
 <div class="container color-dark">
-  <div class="col">
-    <p>
-      Adicionar Categoria
-    </p>
-  </div>
-  <div class="col">
-    <p>
-      Categorias Cadastradas
-    </p>
-  </div>
+	<div class="col">
+		<p>
+			Adicionar Categoria
+		</p>
+	</div>
+	<div class="col">
+		<p>
+			Categorias Cadastradas
+		</p>
+	</div>
 </div>
 <div class="container color-light">
-  <div class="col">
-    <form>
-      <div>
-        <input [(ngModel)]="categoria.id" [ngModelOptions]="{standalone: true}" type="hidden" />
-        <input [(ngModel)]="categoria.nome" class="txt" placeholder="Nome da categoria" [ngModelOptions]="{standalone: true}">
-        <button class="btn" (click)="salvarCategoria()">Salvar</button>
-      </div>
-    </form>
-  </div>
-  <div class="col">
-    <p *ngFor="let categoria of categorias" class="life-container" (click)="editarCategoria(categoria)">
-        {{categoria.nome}}
-    </p>
-  </div>
+	<div class="col">
+		<div>
+			<form>
+				<input [(ngModel)]="categoria.id" [ngModelOptions]="{standalone: true}" type="hidden" />
+				<input [(ngModel)]="categoria.nome" class="txt" placeholder="Nome da categoria" [ngModelOptions]="{standalone: true}">
+				<button class="btn" (click)="salvarCategoria()">Salvar</button>
+			</form>
+		</div>
+	</div>
+	<div class="col">
+		<div *ngFor="let categoria of categorias" class="life-container" (click)="editarCategoria(categoria)">
+			{{categoria.nome}}
+			<span class="right" (click)="excluirCategoria(categoria)">&#x2715;</span>
+		</div>
+	</div>
 </div>

@@ -1,16 +1,7 @@
-.container {
-    display: grid;
-    grid-template-columns: 50% auto;
-}
-
-.col {
-    padding: .4em 1.3em;
-}
-
 input.txt {
     border: 0;
-    padding: 1em;
-    width: 80%;
+    padding: 10px 10px;
+    width: 90%;
     margin-bottom: 2em;
 }
 
@@ -25,8 +16,10 @@ button.btn {
 }
 
 .life-container {
-    background:#3FA0E1;
-    padding:.5em;
+    background:rgb(145, 145, 145);
+    padding: 10px 10px;
+    margin-bottom: 1em;
+    width: 90%;
     font-weight:bold;
     cursor:pointer;
 }
