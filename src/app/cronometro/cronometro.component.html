@@ -1,3 +1,10 @@
-<p>
-  cronometro works!
-</p>
+<div class="content-timer">
+	<div class="div-acoes">
+		<button class="btn" (click)="comecar()">Começar</button>
+	</div>
+	<div class="div-timer">
+		<span class="timer">
+			{{horas + ':' + minutos + ':' + segundos}}
+		</span>
+	</div>
+</div>

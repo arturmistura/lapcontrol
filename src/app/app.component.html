@@ -1,13 +1,10 @@
 <ul>
-  <li>
-    <a router-link="atleta">Atleta</a>
+  <li class="menu">
+    <a routerLink="" (click)="ativarMenu('cronometro')" [ngClass]="{'pressed': cronometroAtivo}">Cronômetro</a>
+    <a routerLink="categoria" (click)="ativarMenu('categoria')" [ngClass]="{'pressed': categoriaAtivo}">Categoria</a>
+    <a routerLink="atleta" (click)="ativarMenu('atleta')" [ngClass]="{'pressed': atletaAtivo}">Atleta</a>
+    <a routerLink="equipe" (click)="ativarMenu('equipe')" [ngClass]="{'pressed': equipeAtivo}">Equipe</a>
   </li>
 </ul>
-
-<app-atleta></app-atleta>
-<br />
-<app-categoria></app-categoria>
-<br />
-<app-equipe></app-equipe>
 
 <router-outlet></router-outlet>

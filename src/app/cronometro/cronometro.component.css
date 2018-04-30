@@ -1,0 +1,26 @@
+.content-timer {
+    margin-top: 50px;
+    background-color: rgb(221, 221, 221);
+}
+
+button.btn {
+    border: 0;
+    padding:1em 3em;
+    background:#565656;
+    color:#FFF;
+    margin: 10px;    
+    cursor:pointer;
+}
+
+.div-acoes {
+    text-align: center;
+}
+
+.div-timer {
+    text-align: center;
+}
+
+.timer {
+    font-size: 80px;
+    color: rgb(145, 145, 145);
+}
