@@ -4,12 +4,14 @@ import { AtletaComponent } from './atleta/atleta.component';
 import { EquipeComponent } from './equipe/equipe.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { CronometroComponent } from './cronometro/cronometro.component';
+import { ProvaComponent } from './prova/prova.component';
 
 const routes: Routes = [
   { path: '', component: CronometroComponent },
   { path: 'atleta', component: AtletaComponent },
   { path: 'equipe', component: EquipeComponent },
-  { path: 'categoria', component: CategoriaComponent }
+  { path: 'categoria', component: CategoriaComponent },
+  { path: 'prova', component: ProvaComponent }
 ];
 
 @NgModule({

@@ -1,3 +1,29 @@
-<p>
-  prova works!
-</p>
+<div class="container color-dark">
+	<div class="col">
+		<p>
+			Adicionar Prova
+		</p>
+	</div>
+	<div class="col">
+		<p>
+			Provas Cadastradas
+		</p>
+	</div>
+</div>
+<div class="container color-light">
+	<div class="col">
+		<div>
+			<form>
+				<input [(ngModel)]="prova.id" [ngModelOptions]="{standalone: true}" type="hidden" />
+				<input [(ngModel)]="prova.nome" class="txt" placeholder="Nome da prova" [ngModelOptions]="{standalone: true}">
+				<button class="btn" (click)="salvarProva()">Salvar</button>
+			</form>
+		</div>
+	</div>
+	<div class="col">
+		<div *ngFor="let prova of provas" class="life-container" (click)="editarProva(prova)">
+			{{prova.nome}}
+			<span class="right" (click)="excluirProva(prova)">&#x2715;</span>
+		</div>
+	</div>
+</div>

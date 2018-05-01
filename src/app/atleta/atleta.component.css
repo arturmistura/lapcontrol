@@ -1,4 +1,4 @@
-input.txt {
+.txt {
     border: 0;
     padding: 10px 10px;
     width: 90%;
@@ -22,4 +22,14 @@ button.btn {
     width: 90%;
     font-weight:bold;
     cursor:pointer;
+}
+
+.div-sexos {
+    display: inline-block;
+    margin-left: 1em;
+}
+
+.label-sexo {
+    margin-right: 10px;
+    color: #000;
 }

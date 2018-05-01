@@ -23,4 +23,26 @@ button.btn {
 .timer {
     font-size: 80px;
     color: rgb(145, 145, 145);
+    display: block;
+}
+
+.txt {
+    border: 0;
+    padding: 10px 10px;
+    width: 90%;
+    margin-bottom: 2em;
+}
+
+.content-marcacao {
+    margin-top: 50px;
+    background-color: rgb(221, 221, 221);
+    padding: 1em 5%;
+}
+
+.div-marcacao {
+    display: inline-block;
+    width: 30%;
+    background-color: rgb(145, 145, 145);
+    padding: 10px;
+    margin: 0.3em;
 }

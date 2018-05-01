@@ -1,0 +1,25 @@
+input.txt {
+    border: 0;
+    padding: 10px 10px;
+    width: 90%;
+    margin-bottom: 2em;
+}
+
+button.btn {
+    border: 0;
+    display:block;
+    padding:1em 3em;
+    background:#565656;
+    color:#FFF;
+    margin-bottom:1em;
+    cursor:pointer;
+}
+
+.life-container {
+    background:rgb(145, 145, 145);
+    padding: 10px 10px;
+    margin-bottom: 1em;
+    width: 90%;
+    font-weight:bold;
+    cursor:pointer;
+}

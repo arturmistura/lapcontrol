@@ -11,6 +11,7 @@ export class AppComponent {
 	categoriaAtivo = false;
 	atletaAtivo = false;
 	equipeAtivo = false;
+	provaAtivo = false;
 
 	constructor() { }
 
@@ -32,6 +33,10 @@ export class AppComponent {
 				this.limparSelecao();
 				this.categoriaAtivo = true;
 				break;
+			case 'prova':
+			this.limparSelecao();
+				this.provaAtivo = true;
+				break;
 			case 'equipe':
 				this.limparSelecao();
 				this.equipeAtivo = true;
@@ -48,5 +53,6 @@ export class AppComponent {
 		this.categoriaAtivo = false;
 		this.atletaAtivo = false;
 		this.equipeAtivo = false;
+		this.provaAtivo = false;
 	}
 }

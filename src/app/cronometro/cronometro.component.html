@@ -6,5 +6,12 @@
 		<span class="timer">
 			{{horas + ':' + minutos + ':' + segundos}}
 		</span>
+		<input [(ngModel)]="tempo.atleta.numero" type="number" class="txt wd-50" style="width: 10%" placeholder="Número do Atleta" [ngModelOptions]="{standalone: true}">
+		<button class="btn" (click)="salvarTempo()">Salvar o tempo</button>
+	</div>
+</div>
+<div class="content-marcacao">
+	<div *ngFor="let tempo of tempos" class="div-marcacao">
+			({{tempo.atleta.numero}}) Caio Azevedo: {{tempo.marcacao.getHours()}}:{{tempo.marcacao.getMinutes()}}:{{tempo.marcacao.getSeconds()}}
 	</div>
 </div>

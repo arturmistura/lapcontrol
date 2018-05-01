@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Tempo } from '../models/Tempo';
 
 @Component({
 	selector: 'app-cronometro',
@@ -12,6 +13,8 @@ export class CronometroComponent implements OnInit {
 	minutos: string;
 	segundos: string;
 	isRunning: boolean;
+	tempo: Tempo;
+	tempos: Array<Tempo>;
 
 	constructor() { }
 
@@ -20,6 +23,8 @@ export class CronometroComponent implements OnInit {
 		this.minutos = '00';
 		this.segundos = '00';
 		this.isRunning = false;
+		this.tempo = new Tempo();
+		this.tempos = new Array<Tempo>();
 	}
 
 	comecar() {
@@ -35,9 +40,11 @@ export class CronometroComponent implements OnInit {
 				this.horas = this.formataValor(diferenca.getHours());
 				this.minutos = this.formataValor(diferenca.getMinutes());
 				this.segundos = this.formataValor(diferenca.getSeconds());
+
+				this.tempo.marcacao = diferenca;
 			}, 1000);
 		} else {
-			if(confirm('O cronômetro está rodando, tem certeza que quer recomeçar?')) {
+			if (confirm('O cronômetro está rodando, tem certeza que quer recomeçar?')) {
 				this.isRunning = false;
 				this.comecar();
 			}
@@ -49,6 +56,19 @@ export class CronometroComponent implements OnInit {
 			return valor;
 		} else {
 			return '0' + valor;
+		}
+	}
+
+	salvarTempo() {
+		if (this.tempo.atleta.numero && this.tempo.atleta.numero > 0) {
+			if (this.tempo.marcacao) {
+				let novaMarcacao = new Tempo();
+				this.tempos.push(Object.assign(novaMarcacao, this.tempo));
+			} else {
+				alert("Você ainda não iniciou o cronômetro!!");
+			}
+		} else {
+			alert("Você precisa inserir um número!!");
 		}
 	}
 }

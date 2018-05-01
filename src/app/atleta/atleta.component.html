@@ -16,6 +16,25 @@
 			<form>
 				<input [(ngModel)]="atleta.id" [ngModelOptions]="{standalone: true}" type="hidden" />
 				<input [(ngModel)]="atleta.nome" class="txt" placeholder="Nome da atleta" [ngModelOptions]="{standalone: true}">
+				<input [(ngModel)]="atleta.numero" type="number" class="txt wd-50" style="width: 10%" placeholder="Número" [ngModelOptions]="{standalone: true}">
+				<div *ngFor="let sexo of sexos" class="div-sexos">
+					<input type="radio" name="radioSexo" [value]="sexo.id" />
+					<span class="label-sexo">{{sexo.descricao}}</span>
+				</div>
+				<div class="">
+					<select [(ngModel)]="equipeSelecionada" [ngModelOptions]="{standalone: true}" class="txt" style="width: 30%">
+						<option value="0" selected>Selecione uma equipe...</option>
+						<option *ngFor="let equipe of getEquipes()" [ngValue]="equipe.id">{{equipe.nome}}</option>
+					</select>
+					<select [(ngModel)]="categoriaSelecionada" [ngModelOptions]="{standalone: true}" class="txt" style="width: 30%">
+						<option value="0" selected>Selecione uma categoria...</option>
+						<option *ngFor="let categoria of getCategorias()" [ngValue]="categoria.id">{{categoria.nome}}</option>
+					</select>
+					<select [(ngModel)]="provaSelecionada" [ngModelOptions]="{standalone: true}" class="txt" style="width: 30%">
+						<option value="0" selected>Selecione uma prova...</option>
+						<option *ngFor="let prova of getProvas()" [ngValue]="prova.id">{{prova.nome}}</option>
+					</select>
+				</div>
 				<button class="btn" (click)="salvarAtleta()">Salvar</button>
 			</form>
 		</div>
