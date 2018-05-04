@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Tempo } from '../models/Tempo';
+import { AtletaService } from '../services/atleta.service';
 
 @Component({
 	selector: 'app-cronometro',
@@ -8,6 +9,7 @@ import { Tempo } from '../models/Tempo';
 })
 export class CronometroComponent implements OnInit {
 
+	_atletaService: AtletaService;
 	tempoInicial: Date;
 	horas: string;
 	minutos: string;
@@ -16,7 +18,9 @@ export class CronometroComponent implements OnInit {
 	tempo: Tempo;
 	tempos: Array<Tempo>;
 
-	constructor() { }
+	constructor(private atletaService: AtletaService) {
+		this._atletaService = atletaService;
+	}
 
 	ngOnInit() {
 		this.horas = '00';
@@ -61,11 +65,17 @@ export class CronometroComponent implements OnInit {
 
 	salvarTempo() {
 		if (this.tempo.atleta.numero && this.tempo.atleta.numero > 0) {
-			if (this.tempo.marcacao) {
-				let novaMarcacao = new Tempo();
-				this.tempos.push(Object.assign(novaMarcacao, this.tempo));
+			this.tempo.atleta = this._atletaService.getAtletaByNumero(this.tempo.atleta.numero);
+
+			if (this.tempo.atleta) {
+				if (this.tempo.marcacao) {
+					let novaMarcacao = new Tempo();
+					this.tempos.push(Object.assign(novaMarcacao, this.tempo));
+				} else {
+					alert("Você ainda não iniciou o cronômetro!!");
+				}
 			} else {
-				alert("Você ainda não iniciou o cronômetro!!");
+				alert('Número de atleta não existe!!');
 			}
 		} else {
 			alert("Você precisa inserir um número!!");

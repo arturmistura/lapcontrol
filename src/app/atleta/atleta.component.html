@@ -16,7 +16,7 @@
 			<form>
 				<input [(ngModel)]="atleta.id" [ngModelOptions]="{standalone: true}" type="hidden" />
 				<input [(ngModel)]="atleta.nome" class="txt" placeholder="Nome da atleta" [ngModelOptions]="{standalone: true}">
-				<input [(ngModel)]="atleta.numero" type="number" class="txt wd-50" style="width: 10%" placeholder="Número" [ngModelOptions]="{standalone: true}">
+				<input [(ngModel)]="atleta.numero" type="number" class="txt wd-50" style="width: 15%" placeholder="Número" [ngModelOptions]="{standalone: true}">
 				<div *ngFor="let sexo of sexos" class="div-sexos">
 					<input type="radio" name="radioSexo" [value]="sexo.id" />
 					<span class="label-sexo">{{sexo.descricao}}</span>

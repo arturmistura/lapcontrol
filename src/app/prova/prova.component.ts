@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Prova } from '../models/prova';
+import { ProvaService } from '../services/prova.service';
 
 @Component({
 	selector: 'app-prova',
@@ -9,24 +10,26 @@ import { Prova } from '../models/prova';
 })
 export class ProvaComponent implements OnInit {
 
+	_service: ProvaService;
 	provas: Prova[];
 	prova: Prova;
 	count = 0;
 
-	constructor() { }
+	constructor(private provaService: ProvaService) {
+		this._service = this.provaService;
+	 }
 
 	ngOnInit() {
-		this.provas = new Array<Prova>();
+		this.provas = this._service.getProvas();
 		this.prova = new Prova();
 	}
 
 	salvarProva() {
 		if (this.prova.id == null || this.prova.id == 0) {
 			this.prova.id = ++this.count;
-			this.provas.push(this.prova);
+			this._service.addProva(this.prova);
 		} else {
-			var index = this.provas.findIndex(a => a.id == this.prova.id);
-			this.provas[index] = this.prova;
+			this._service.editProva(this.prova);
 		}
 		
 		this.prova = new Prova();
@@ -37,9 +40,8 @@ export class ProvaComponent implements OnInit {
 	}
 
 	excluirProva(prova: Prova) {
-		if(prova.id > 0){
-			let index = this.provas.findIndex(a => a.id == prova.id);
-			this.provas.splice(index, 1);
+		if(prova && prova.id > 0){
+			this._service.deleteProva(prova);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Equipe } from '../models/equipe';
+import { EquipeService } from '../services/equipe.service';
 
 @Component({
 	selector: 'app-equipe',
@@ -9,24 +10,26 @@ import { Equipe } from '../models/equipe';
 })
 export class EquipeComponent implements OnInit {
 
+	_service: EquipeService;
 	equipes: Equipe[];
 	equipe: Equipe;
 	count = 0;
 
-	constructor() { }
+	constructor(private equipeService: EquipeService) {
+		this._service = equipeService;
+	 }
 
 	ngOnInit() {
-		this.equipes = new Array<Equipe>();
+		this.equipes = this._service.getEquipes();
 		this.equipe = new Equipe();
 	}
 
 	salvarEquipe() {
 		if (this.equipe.id == null || this.equipe.id == 0) {
 			this.equipe.id = ++this.count;
-			this.equipes.push(this.equipe);
+			this._service.addEquipe(this.equipe);
 		} else {
-			var index = this.equipes.findIndex(a => a.id == this.equipe.id);
-			this.equipes[index] = this.equipe;
+			this._service.editEquipe(this.equipe);
 		}
 		
 		this.equipe = new Equipe();
@@ -37,9 +40,8 @@ export class EquipeComponent implements OnInit {
 	}
 
 	excluirEquipe(equipe: Equipe) {
-		if(equipe.id > 0){
-			let index = this.equipes.findIndex(a => a.id == equipe.id);
-			this.equipes.splice(index, 1);
+		if(equipe && equipe.id > 0){
+			this._service.deleteEquipe(equipe);
 		}
 	}
 }

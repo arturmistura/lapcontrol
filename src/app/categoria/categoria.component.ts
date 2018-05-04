@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Categoria } from '../models/categoria';
+import { CategoriaService } from '../services/categoria.service';
 
 @Component({
 	selector: 'app-categoria',
@@ -9,26 +10,28 @@ import { Categoria } from '../models/categoria';
 })
 export class CategoriaComponent implements OnInit {
 
+	_service: CategoriaService;
 	categorias: Categoria[];
 	categoria: Categoria;
 	count = 0;
 
-	constructor() { }
+	constructor(private categoriaService: CategoriaService) {
+		this._service = categoriaService;
+	}
 
 	ngOnInit() {
-		this.categorias = new Array<Categoria>();
+		this.categorias = this._service.getCategorias();
 		this.categoria = new Categoria();
 	}
 
 	salvarCategoria() {
 		if (this.categoria.id == null || this.categoria.id == 0) {
 			this.categoria.id = ++this.count;
-			this.categorias.push(this.categoria);
+			this._service.addCategoria(this.categoria);
 		} else {
-			var index = this.categorias.findIndex(a => a.id == this.categoria.id);
-			this.categorias[index] = this.categoria;
+			this._service.editCategoria(this.categoria);
 		}
-		
+
 		this.categoria = new Categoria();
 	}
 
@@ -37,9 +40,8 @@ export class CategoriaComponent implements OnInit {
 	}
 
 	excluirCategoria(categoria: Categoria) {
-		if(categoria.id > 0){
-			let index = this.categorias.findIndex(a => a.id == categoria.id);
-			this.categorias.splice(index, 1);
+		if (categoria && categoria.id > 0) {
+			this._service.deleteCategoria(categoria);
 		}
 	}
 }

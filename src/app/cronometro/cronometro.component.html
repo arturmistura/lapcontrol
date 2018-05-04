@@ -12,6 +12,6 @@
 </div>
 <div class="content-marcacao">
 	<div *ngFor="let tempo of tempos" class="div-marcacao">
-			({{tempo.atleta.numero}}) Caio Azevedo: {{tempo.marcacao.getHours()}}:{{tempo.marcacao.getMinutes()}}:{{tempo.marcacao.getSeconds()}}
+			({{tempo.atleta.numero}}) {{tempo.atleta.nome}}: {{tempo.marcacao.getHours()}}:{{tempo.marcacao.getMinutes()}}:{{tempo.marcacao.getSeconds()}}
 	</div>
 </div>

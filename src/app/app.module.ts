@@ -11,6 +11,10 @@ import { CronometroComponent } from './cronometro/cronometro.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { EquipeComponent } from './equipe/equipe.component';
 import { ProvaComponent } from './prova/prova.component';
+import { AtletaService } from './services/atleta.service';
+import { CategoriaService } from './services/categoria.service';
+import { EquipeService } from './services/equipe.service';
+import { ProvaService } from './services/prova.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,7 @@ import { ProvaComponent } from './prova/prova.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AtletaService, CategoriaService, EquipeService, ProvaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
