@@ -18,7 +18,7 @@ const {app, BrowserWindow} = require('electron')
     }))
   
     // Abre o DevTools.
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
   
     // Emitido quando a janela é fechada.
     win.on('closed', () => {

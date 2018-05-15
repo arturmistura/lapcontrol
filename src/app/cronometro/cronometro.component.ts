@@ -29,6 +29,12 @@ export class CronometroComponent implements OnInit {
 		this.isRunning = false;
 		this.tempo = new Tempo();
 		this.tempos = new Array<Tempo>();
+		
+		this.localStorage.getItem('tempoInicial').subscribe(tempoInicial => {
+			if(tempoInicial) {
+				this.comecar();
+			}
+		});
 	}
 
 	comecar() {
