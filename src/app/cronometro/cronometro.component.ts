@@ -5,7 +5,8 @@ import { AtletaService } from '../services/atleta.service';
 @Component({
 	selector: 'app-cronometro',
 	templateUrl: './cronometro.component.html',
-	styleUrls: ['./cronometro.component.css']
+	styleUrls: ['./cronometro.component.css'],
+	providers: [AtletaService]
 })
 export class CronometroComponent implements OnInit {
 

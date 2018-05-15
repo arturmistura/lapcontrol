@@ -12,7 +12,8 @@ import { ProvaService } from '../services/prova.service';
 @Component({
 	selector: 'app-atleta',
 	templateUrl: './atleta.component.html',
-	styleUrls: ['./atleta.component.css']
+	styleUrls: ['./atleta.component.css'],
+	providers: [AtletaService]
 })
 export class AtletaComponent implements OnInit {
 
@@ -84,7 +85,7 @@ export class AtletaComponent implements OnInit {
 	}
 
 	getCategorias() {
-		return this._categoriaService.getCategorias();
+		// return this._categoriaService.getCategorias();
 	}
 
 	getProvas() {

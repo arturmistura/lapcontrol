@@ -1,9 +1,9 @@
-export class Categoria {
-
+export class ICategoria {
     id: number;
     nome: string;
+}
 
-    constructor() { 
-    }
-
+export class Categoria {
+    id: number;
+    nome: string;
 }

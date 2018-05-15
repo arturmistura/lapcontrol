@@ -15,6 +15,7 @@ import { AtletaService } from './services/atleta.service';
 import { CategoriaService } from './services/categoria.service';
 import { EquipeService } from './services/equipe.service';
 import { ProvaService } from './services/prova.service';
+import { LocalStorageModule } from '@ngx-pwa/local-storage';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { ProvaService } from './services/prova.service';
     AppRoutingModule,
     NgxElectronModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LocalStorageModule
   ],
-  providers: [AtletaService, CategoriaService, EquipeService, ProvaService],
+  providers: [CategoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
