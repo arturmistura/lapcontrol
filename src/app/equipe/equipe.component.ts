@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Equipe } from '../models/equipe';
 import { EquipeService } from '../services/equipe.service';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
 	selector: 'app-equipe',
@@ -10,28 +11,27 @@ import { EquipeService } from '../services/equipe.service';
 })
 export class EquipeComponent implements OnInit {
 
-	_service: EquipeService;
 	equipes: Equipe[];
 	equipe: Equipe;
 	count = 0;
 
-	constructor(private equipeService: EquipeService) {
-		this._service = equipeService;
-	 }
+	constructor(protected localStorage: LocalStorage) {
+	}
 
 	ngOnInit() {
-		this.equipes = this._service.getEquipes();
+		this.listarEquipes();
 		this.equipe = new Equipe();
 	}
 
 	salvarEquipe() {
 		if (this.equipe.id == null || this.equipe.id == 0) {
-			this.equipe.id = ++this.count;
-			this._service.addEquipe(this.equipe);
+			var lastElement = this.equipes[this.equipes.length -1];
+			this.equipe.id = lastElement ? (lastElement.id + 1) : 1;
+			this.addEquipe(this.equipe);
 		} else {
-			this._service.editEquipe(this.equipe);
+			this.editEquipe(this.equipe);
 		}
-		
+
 		this.equipe = new Equipe();
 	}
 
@@ -40,8 +40,62 @@ export class EquipeComponent implements OnInit {
 	}
 
 	excluirEquipe(equipe: Equipe) {
-		if(equipe && equipe.id > 0){
-			this._service.deleteEquipe(equipe);
+		if (equipe && equipe.id > 0) {
+			this.deleteEquipe(equipe);
 		}
+	}
+
+	listarEquipes() {
+		this.getEquipes().subscribe((equipes) => {
+			if (equipes) {
+				this.equipes = equipes;
+			} else {
+				this.equipes = new Array<Equipe>();
+				this.setItem(this.equipes);
+			}
+		});
+	}
+
+	getEquipes() {
+		return this.localStorage.getItem('equipe');
+	}
+
+	addEquipe(equipe: Equipe) {
+		if (equipe) {
+			this.getEquipes().subscribe(equipes => {
+				equipes.push(equipe);
+				this.setItem(equipes);
+			});
+		}
+	}
+
+	editEquipe(equipe: Equipe) {
+		if (equipe) {
+			this.getEquipes().subscribe(equipes => {
+				let index = equipes.findIndex(a => a.id == equipe.id);
+				if (index >= 0) {
+					equipes[index] = equipe;
+					this.setItem(equipes);
+				} else {
+					this.addEquipe(equipe);
+				}
+			});
+		}
+	}
+
+	deleteEquipe(equipe: Equipe) {
+		if (equipe.id > 0) {
+			this.getEquipes().subscribe(equipes => {
+				let index = equipes.findIndex(a => a.id == equipe.id);
+				equipes.splice(index, 1);
+				this.setItem(equipes);
+			});
+		}
+	}
+
+	setItem(equipes) {
+		return this.localStorage.setItem('equipe', equipes).subscribe(() => {
+			this.listarEquipes();
+		});
 	}
 }

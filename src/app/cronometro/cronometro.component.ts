@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tempo } from '../models/Tempo';
 import { AtletaService } from '../services/atleta.service';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
 	selector: 'app-cronometro',
@@ -10,7 +11,6 @@ import { AtletaService } from '../services/atleta.service';
 })
 export class CronometroComponent implements OnInit {
 
-	_atletaService: AtletaService;
 	tempoInicial: Date;
 	horas: string;
 	minutos: string;
@@ -19,8 +19,7 @@ export class CronometroComponent implements OnInit {
 	tempo: Tempo;
 	tempos: Array<Tempo>;
 
-	constructor(private atletaService: AtletaService) {
-		this._atletaService = atletaService;
+	constructor(protected localStorage: LocalStorage) {
 	}
 
 	ngOnInit() {
@@ -34,20 +33,28 @@ export class CronometroComponent implements OnInit {
 
 	comecar() {
 		if (!this.isRunning) {
-			this.tempoInicial = new Date();
-			this.isRunning = true;
+			this.localStorage.getItem('tempoInicial').subscribe(tempoInicial => {
+				if (tempoInicial) {
+					this.tempoInicial = tempoInicial;
+				} else {
+					this.tempoInicial = new Date();
+					this.localStorage.setItem('tempoInicial', this.tempoInicial).subscribe(() => {});
+				}
 
-			setInterval(() => {
-				let tempoAtual = new Date();
-				let diferencaMilisegundos = tempoAtual.getTime() - this.tempoInicial.getTime();
-				let diferenca = new Date(diferencaMilisegundos - 79200000);
+				this.isRunning = true;
 
-				this.horas = this.formataValor(diferenca.getHours());
-				this.minutos = this.formataValor(diferenca.getMinutes());
-				this.segundos = this.formataValor(diferenca.getSeconds());
+				setInterval(() => {
+					let tempoAtual = new Date();
+					let diferencaMilisegundos = tempoAtual.getTime() - this.tempoInicial.getTime();
+					let diferenca = new Date(diferencaMilisegundos - 79200000);
 
-				this.tempo.marcacao = diferenca;
-			}, 1000);
+					this.horas = this.formataValor(diferenca.getHours());
+					this.minutos = this.formataValor(diferenca.getMinutes());
+					this.segundos = this.formataValor(diferenca.getSeconds());
+
+					this.tempo.marcacao = diferenca;
+				}, 1000);
+			});
 		} else {
 			if (confirm('O cronômetro está rodando, tem certeza que quer recomeçar?')) {
 				this.isRunning = false;
@@ -66,20 +73,27 @@ export class CronometroComponent implements OnInit {
 
 	salvarTempo() {
 		if (this.tempo.atleta.numero && this.tempo.atleta.numero > 0) {
-			this.tempo.atleta = this._atletaService.getAtletaByNumero(this.tempo.atleta.numero);
+			this.getAtletas().subscribe(atletas => {
+				let atletaEncontrado = atletas.find(a => a.numero == this.tempo.atleta.numero);
 
-			if (this.tempo.atleta) {
-				if (this.tempo.marcacao) {
-					let novaMarcacao = new Tempo();
-					this.tempos.push(Object.assign(novaMarcacao, this.tempo));
+				if (atletaEncontrado) {
+					this.tempo.atleta = atletaEncontrado;
+					if (this.tempo.marcacao) {
+						let novaMarcacao = new Tempo();
+						this.tempos.push(Object.assign(novaMarcacao, this.tempo));
+					} else {
+						alert("Você ainda não iniciou o cronômetro!!");
+					}
 				} else {
-					alert("Você ainda não iniciou o cronômetro!!");
+					alert('Número de atleta não existe!!');
 				}
-			} else {
-				alert('Número de atleta não existe!!');
-			}
+			});
 		} else {
 			alert("Você precisa inserir um número!!");
 		}
+	}
+
+	getAtletas() {
+		return this.localStorage.getItem('atleta');
 	}
 }

@@ -24,15 +24,15 @@
 				<div class="">
 					<select [(ngModel)]="equipeSelecionada" [ngModelOptions]="{standalone: true}" class="txt" style="width: 30%">
 						<option value="0" selected>Selecione uma equipe...</option>
-						<option *ngFor="let equipe of getEquipes()" [ngValue]="equipe.id">{{equipe.nome}}</option>
+						<option *ngFor="let equipe of equipes" [ngValue]="equipe.id">{{equipe.nome}}</option>
 					</select>
 					<select [(ngModel)]="categoriaSelecionada" [ngModelOptions]="{standalone: true}" class="txt" style="width: 30%">
 						<option value="0" selected>Selecione uma categoria...</option>
-						<option *ngFor="let categoria of getCategorias()" [ngValue]="categoria.id">{{categoria.nome}}</option>
+						<option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nome}}</option>
 					</select>
 					<select [(ngModel)]="provaSelecionada" [ngModelOptions]="{standalone: true}" class="txt" style="width: 30%">
 						<option value="0" selected>Selecione uma prova...</option>
-						<option *ngFor="let prova of getProvas()" [ngValue]="prova.id">{{prova.nome}}</option>
+						<option *ngFor="let prova of provas" [ngValue]="prova.id">{{prova.nome}}</option>
 					</select>
 				</div>
 				<button class="btn" (click)="salvarAtleta()">Salvar</button>

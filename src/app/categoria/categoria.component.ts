@@ -25,7 +25,8 @@ export class CategoriaComponent implements OnInit {
 
 	salvarCategoria() {
 		if (this.categoria.id == null || this.categoria.id == 0) {
-			this.categoria.id = ++this.count;
+			var lastElement = this.categorias[this.categorias.length -1];
+			this.categoria.id = lastElement ? (lastElement.id + 1) : 1;
 			this.addCategoria(this.categoria);
 		} else {
 			this.editCategoria(this.categoria);
@@ -46,7 +47,12 @@ export class CategoriaComponent implements OnInit {
 
 	listarCategorias() {
 		this.getCategorias().subscribe((categorias) => {
-			this.categorias = categorias;
+			if (categorias) {
+				this.categorias = categorias;
+			} else {
+				this.categorias = new Array<Categoria>();
+				this.setItem(this.categorias);
+			}
 		});
 	}
 
@@ -67,8 +73,12 @@ export class CategoriaComponent implements OnInit {
 		if (categoria) {
 			this.getCategorias().subscribe(categorias => {
 				let index = categorias.findIndex(a => a.id == categoria.id);
-				categorias[index] = categoria;
-				this.setItem(categorias);
+				if (index >= 0) {
+					categorias[index] = categoria;
+					this.setItem(categorias);
+				} else {
+					this.addCategoria(categoria);
+				}
 			});
 		}
 	}
@@ -86,6 +96,6 @@ export class CategoriaComponent implements OnInit {
 	setItem(categorias) {
 		return this.localStorage.setItem('categoria', categorias).subscribe(() => {
 			this.listarCategorias();
-		 });
+		});
 	}
 }
