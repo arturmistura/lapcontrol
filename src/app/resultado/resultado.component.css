@@ -1,0 +1,52 @@
+.content-result {
+    margin-top: 50px;
+    background-color: rgb(221, 221, 221);
+}
+
+button.btn {
+    border: 0;
+    padding:1em 3em;
+    background:#565656;
+    color:#FFF;
+    margin: 10px;    
+    cursor:pointer;
+}
+
+.txt {
+    border: 0;
+    padding: 10px 10px;
+    width: 21%;
+    margin-bottom: 2em;
+    margin-right: 5em;
+}
+
+.filtros {
+    height: 20%;
+    padding-top: 1em;
+    padding-left: 4em;
+}
+
+.result {
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+    .result table {
+        widows: 95%;
+        color: #000;
+    }
+
+        .result table th { 
+            width: 16%;
+            text-align: left;
+            padding: 0.5em;
+            border: 1px solid #000;
+         }
+
+        .result table td { 
+            width: 16%;
+            text-align: left;
+            padding: 0.5em;
+            border: 1px solid #000;
+        }

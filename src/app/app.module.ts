@@ -11,11 +11,8 @@ import { CronometroComponent } from './cronometro/cronometro.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { EquipeComponent } from './equipe/equipe.component';
 import { ProvaComponent } from './prova/prova.component';
-import { AtletaService } from './services/atleta.service';
-import { CategoriaService } from './services/categoria.service';
-import { EquipeService } from './services/equipe.service';
-import { ProvaService } from './services/prova.service';
 import { LocalStorageModule } from '@ngx-pwa/local-storage';
+import { ResultadoComponent } from './resultado/resultado.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +22,7 @@ import { LocalStorageModule } from '@ngx-pwa/local-storage';
     CategoriaComponent,
     EquipeComponent,
     ProvaComponent,
+    ResultadoComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +32,7 @@ import { LocalStorageModule } from '@ngx-pwa/local-storage';
     ReactiveFormsModule,
     LocalStorageModule
   ],
-  providers: [CategoriaService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

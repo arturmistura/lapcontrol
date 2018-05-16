@@ -8,7 +8,14 @@ const {app, BrowserWindow} = require('electron')
   
   function createWindow () {
     // Criar uma janela de navegação.
-    win = new BrowserWindow({width: 800, height: 600})
+	
+    win = new BrowserWindow({
+			width: 800, 
+			height: 600,
+			webPreferences: {
+				webSecurity: false
+			}
+	})
   
     // e carrega index.html do app.
     win.loadURL(url.format({
@@ -18,7 +25,7 @@ const {app, BrowserWindow} = require('electron')
     }))
   
     // Abre o DevTools.
-    // win.webContents.openDevTools()
+    //win.webContents.openDevTools()
   
     // Emitido quando a janela é fechada.
     win.on('closed', () => {

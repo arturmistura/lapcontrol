@@ -12,6 +12,7 @@ export class AppComponent {
 	atletaAtivo = false;
 	equipeAtivo = false;
 	provaAtivo = false;
+	resultadoAtivo = false;
 
 	constructor() { }
 
@@ -34,12 +35,16 @@ export class AppComponent {
 				this.categoriaAtivo = true;
 				break;
 			case 'prova':
-			this.limparSelecao();
+				this.limparSelecao();
 				this.provaAtivo = true;
 				break;
 			case 'equipe':
 				this.limparSelecao();
 				this.equipeAtivo = true;
+				break;
+			case 'resultado':
+				this.limparSelecao();
+				this.resultadoAtivo = true;
 				break;
 			default:
 				this.limparSelecao();
@@ -54,5 +59,6 @@ export class AppComponent {
 		this.atletaAtivo = false;
 		this.equipeAtivo = false;
 		this.provaAtivo = false;
+		this.resultadoAtivo = false;
 	}
 }

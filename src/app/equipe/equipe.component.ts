@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Equipe } from '../models/equipe';
-import { EquipeService } from '../services/equipe.service';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({

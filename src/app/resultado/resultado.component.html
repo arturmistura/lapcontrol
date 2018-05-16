@@ -1,0 +1,44 @@
+<div class="content-result">
+    <div class="filtros">
+        <div class="">
+            <select [(ngModel)]="equipeSelecionada" [ngModelOptions]="{standalone: true}" class="txt" (change)="filtrar()">
+                <option value="0" selected>Selecione uma equipe...</option>
+                <option *ngFor="let equipe of equipes" [ngValue]="equipe.id">{{equipe.nome}}</option>
+            </select>
+            <select [(ngModel)]="categoriaSelecionada" [ngModelOptions]="{standalone: true}" class="txt" (change)="filtrar()">
+                <option value="0" selected>Selecione uma categoria...</option>
+                <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">{{categoria.nome}}</option>
+            </select>
+            <select [(ngModel)]="provaSelecionada" [ngModelOptions]="{standalone: true}" class="txt" (change)="filtrar()">
+                <option value="0" selected>Selecione uma prova...</option>
+                <option *ngFor="let prova of provas" [ngValue]="prova.id">{{prova.nome}}</option>
+            </select>
+            <select [(ngModel)]="sexoSelecionado" [ngModelOptions]="{standalone: true}" class="txt" (change)="filtrar()">
+                <option value="0" selected>Selecione um sexo...</option>
+                <option *ngFor="let sexo of sexos" [ngValue]="sexo.id">{{sexo.descricao}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="result">
+        <table cellspacing="0">
+            <tr>
+                <th>Nome</th>
+                <th>Sexo</th>
+                <th>Número</th>
+                <th>Categoria</th>
+                <th>Equipe</th>
+                <th>Prova</th>
+                <th>Tempo</th>
+            </tr>
+            <tr *ngFor="let tempo of temposFiltrado">
+                <td>{{tempo.atleta.nome}}</td>
+                <td>{{defineSexo(tempo.atleta.sexo)}}</td>
+                <td>{{tempo.atleta.numero}}</td>
+                <td>{{defineCategoria(tempo.atleta.categoria.id)}}</td>
+                <td>{{defineEquipe(tempo.atleta.equipe.id)}}</td>
+                <td>{{defineProva(tempo.atleta.prova.id)}}</td>
+                <td>{{formataValor(tempo.marcacao.getHours())}}:{{formataValor(tempo.marcacao.getMinutes())}}:{{formataValor(tempo.marcacao.getSeconds())}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

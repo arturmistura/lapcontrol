@@ -5,12 +5,14 @@ import { EquipeComponent } from './equipe/equipe.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { CronometroComponent } from './cronometro/cronometro.component';
 import { ProvaComponent } from './prova/prova.component';
+import { ResultadoComponent } from './resultado/resultado.component';
 
 const routes: Routes = [
   { path: '', component: CronometroComponent },
   { path: 'atleta', component: AtletaComponent },
   { path: 'equipe', component: EquipeComponent },
   { path: 'categoria', component: CategoriaComponent },
+  { path: 'resultado', component: ResultadoComponent },
   { path: 'prova', component: ProvaComponent }
 ];
 

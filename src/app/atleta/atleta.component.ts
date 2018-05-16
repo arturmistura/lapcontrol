@@ -4,17 +4,12 @@ import { Atleta } from '../models/atleta';
 import { Equipe } from '../models/equipe';
 import { Categoria } from '../models/categoria';
 import { Prova } from '../models/prova';
-import { AtletaService } from '../services/atleta.service';
-import { CategoriaService } from '../services/categoria.service';
-import { EquipeService } from '../services/equipe.service';
-import { ProvaService } from '../services/prova.service';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
 	selector: 'app-atleta',
 	templateUrl: './atleta.component.html',
-	styleUrls: ['./atleta.component.css'],
-	providers: [AtletaService]
+	styleUrls: ['./atleta.component.css']
 })
 export class AtletaComponent implements OnInit {
 	atletas: Atleta[];
@@ -75,6 +70,10 @@ export class AtletaComponent implements OnInit {
 		if(atleta && atleta.id > 0){
 			this.deleteAtleta(atleta);
 		}
+	}
+
+	alterarSexo(sexo) {
+		this.atleta.sexo = sexo.id;
 	}
 
 	listarAtletas() {

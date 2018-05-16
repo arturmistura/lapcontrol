@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Tempo } from '../models/Tempo';
-import { AtletaService } from '../services/atleta.service';
 import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
 	selector: 'app-cronometro',
 	templateUrl: './cronometro.component.html',
-	styleUrls: ['./cronometro.component.css'],
-	providers: [AtletaService]
+	styleUrls: ['./cronometro.component.css']
 })
 export class CronometroComponent implements OnInit {
 
@@ -18,6 +16,7 @@ export class CronometroComponent implements OnInit {
 	isRunning: boolean;
 	tempo: Tempo;
 	tempos: Array<Tempo>;
+	interval;
 
 	constructor(protected localStorage: LocalStorage) {
 	}
@@ -29,12 +28,22 @@ export class CronometroComponent implements OnInit {
 		this.isRunning = false;
 		this.tempo = new Tempo();
 		this.tempos = new Array<Tempo>();
-		
+
 		this.localStorage.getItem('tempoInicial').subscribe(tempoInicial => {
-			if(tempoInicial) {
+			if (tempoInicial) {
 				this.comecar();
 			}
 		});
+
+		this.listarTempos();
+	}
+
+	parar() {
+		if (this.interval) {
+			clearInterval(this.interval);
+			this.isRunning = false;
+			this.localStorage.removeItem('tempoInicial').subscribe(() => { });
+		}
 	}
 
 	comecar() {
@@ -44,12 +53,12 @@ export class CronometroComponent implements OnInit {
 					this.tempoInicial = tempoInicial;
 				} else {
 					this.tempoInicial = new Date();
-					this.localStorage.setItem('tempoInicial', this.tempoInicial).subscribe(() => {});
+					this.localStorage.setItem('tempoInicial', this.tempoInicial).subscribe(() => { });
 				}
 
 				this.isRunning = true;
 
-				setInterval(() => {
+				this.interval = setInterval(() => {
 					let tempoAtual = new Date();
 					let diferencaMilisegundos = tempoAtual.getTime() - this.tempoInicial.getTime();
 					let diferenca = new Date(diferencaMilisegundos - 79200000);
@@ -77,6 +86,20 @@ export class CronometroComponent implements OnInit {
 		}
 	}
 
+	limparMarcacoes() {
+		this.localStorage.removeItem('tempos').subscribe(() => {
+			this.tempos = new Array<Tempo>();
+		});
+	}
+
+	listarTempos() {
+		this.localStorage.getItem('tempos').subscribe(tempos => {
+			if (tempos) {
+				this.tempos = tempos;
+			}
+		})
+	}
+
 	salvarTempo() {
 		if (this.tempo.atleta.numero && this.tempo.atleta.numero > 0) {
 			this.getAtletas().subscribe(atletas => {
@@ -87,6 +110,9 @@ export class CronometroComponent implements OnInit {
 					if (this.tempo.marcacao) {
 						let novaMarcacao = new Tempo();
 						this.tempos.push(Object.assign(novaMarcacao, this.tempo));
+						this.localStorage.setItem('tempos', this.tempos).subscribe(() => { 
+							this.listarTempos();
+						});
 					} else {
 						alert("Você ainda não iniciou o cronômetro!!");
 					}

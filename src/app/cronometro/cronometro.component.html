@@ -1,17 +1,26 @@
 <div class="content-timer">
-	<div class="div-acoes">
-		<button class="btn" (click)="comecar()">Começar</button>
+	<div class="div-botoes">
+		<div class="div-acoes">
+			<button class="btn" (click)="comecar()">Começar</button>
+		</div>
+		<div class="div-acoes">
+			<button class="btn" (click)="parar()">Parar</button>
+		</div>
+		<div class="div-acoes">
+			<button class="btn" (click)="limparMarcacoes()">Limpar marcações</button>
+		</div>
 	</div>
 	<div class="div-timer">
 		<span class="timer">
 			{{horas + ':' + minutos + ':' + segundos}}
 		</span>
-		<input [(ngModel)]="tempo.atleta.numero" type="number" class="txt wd-50" style="width: 10%" placeholder="Número do Atleta" [ngModelOptions]="{standalone: true}">
+		<input [(ngModel)]="tempo.atleta.numero" type="number" class="txt wd-50" style="width: 10%" placeholder="Número do Atleta"
+		 [ngModelOptions]="{standalone: true}">
 		<button class="btn" (click)="salvarTempo()">Salvar o tempo</button>
 	</div>
 </div>
 <div class="content-marcacao">
 	<div *ngFor="let tempo of tempos" class="div-marcacao">
-			({{tempo.atleta.numero}}) {{tempo.atleta.nome}}: {{tempo.marcacao.getHours()}}:{{tempo.marcacao.getMinutes()}}:{{tempo.marcacao.getSeconds()}}
+		({{tempo.atleta.numero}}) {{tempo.atleta.nome}}: {{formataValor(tempo.marcacao.getHours())}}:{{formataValor(tempo.marcacao.getMinutes())}}:{{formataValor(tempo.marcacao.getSeconds())}}
 	</div>
 </div>

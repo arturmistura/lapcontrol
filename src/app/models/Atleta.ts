@@ -7,7 +7,7 @@ export class Atleta {
     id: number;
     nome: string;
     numero: number;
-    sexo: number;
+    sexo: number = 1;
     equipe: Equipe;
     categoria: Categoria;
     prova: Prova;
